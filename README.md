@@ -122,13 +122,6 @@ A remoção dos documentos é feita sempre a partir do início da fila.
 
 ---
 
-##  Tecnologias utilizadas
-
-* Linguagem C
-* Compilador GCC
-
----
-
 ## Tecnologias
 
 * Linguagem C
