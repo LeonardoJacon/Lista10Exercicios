@@ -1,0 +1,84 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct Documento {
+    int id;
+    int paginas;
+    int prioridade;
+    struct Documento *prox;
+} Documento;
+
+typedef struct {
+    Documento *inicio;
+} FilaPrioridade;
+
+void inicializar(FilaPrioridade *f) {
+    f->inicio = NULL;
+}
+
+void enqueue(FilaPrioridade *f, int id, int paginas, int prioridade) {
+    Documento *novo = (Documento*) malloc(sizeof(Documento));
+    novo->id = id;
+    novo->paginas = paginas;
+    novo->prioridade = prioridade;
+    novo->prox = NULL;
+
+    if (f->inicio == NULL || prioridade < f->inicio->prioridade) {
+        novo->prox = f->inicio;
+        f->inicio = novo;
+    } else {
+        Documento *atual = f->inicio;
+
+        while (atual->prox != NULL &&
+               atual->prox->prioridade <= prioridade) {
+            atual = atual->prox;
+        }
+
+        novo->prox = atual->prox;
+        atual->prox = novo;
+    }
+}
+
+Documento* dequeue(FilaPrioridade *f) {
+    if (f->inicio == NULL) return NULL;
+
+    Documento *temp = f->inicio;
+    f->inicio = f->inicio->prox;
+    return temp;
+}
+
+int main() {
+    FilaPrioridade fila;
+    inicializar(&fila);
+
+    int n, i, id, paginas, prioridade;
+
+    printf("Quantidade de documentos: ");
+    scanf("%d", &n);
+
+    for (i = 0; i < n; i++) {
+        printf("\nDocumento %d\n", i + 1);
+
+        printf("ID: ");
+        scanf("%d", &id);
+
+        printf("Numero de paginas: ");
+        scanf("%d", &paginas);
+
+        printf("Prioridade (menor = mais urgente): ");
+        scanf("%d", &prioridade);
+
+        enqueue(&fila, id, paginas, prioridade);
+    }
+
+    printf("\n--- Impressao ---\n");
+
+    Documento *d;
+    while ((d = dequeue(&fila)) != NULL) {
+        printf("Documento %d | Paginas: %d | Prioridade: %d\n",
+               d->id, d->paginas, d->prioridade);
+        free(d);
+    }
+
+    return 0;
+}

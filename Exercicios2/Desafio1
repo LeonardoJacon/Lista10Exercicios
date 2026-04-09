@@ -1,0 +1,76 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct Cliente {
+    int id;
+    int tempoAtendimento;
+    struct Cliente *prox;
+} Cliente;
+
+typedef struct {
+    Cliente *inicio;
+    Cliente *fim;
+} Fila;
+
+void inicializar(Fila *f) {
+    f->inicio = NULL;
+    f->fim = NULL;
+}
+
+void enqueue(Fila *f, int id, int tempo) {
+    Cliente *novo = (Cliente*) malloc(sizeof(Cliente));
+    novo->id = id;
+    novo->tempoAtendimento = tempo;
+    novo->prox = NULL;
+
+    if (f->fim == NULL) {
+        f->inicio = f->fim = novo;
+    } else {
+        f->fim->prox = novo;
+        f->fim = novo;
+    }
+}
+
+Cliente* dequeue(Fila *f) {
+    if (f->inicio == NULL) return NULL;
+
+    Cliente *temp = f->inicio;
+    f->inicio = f->inicio->prox;
+
+    if (f->inicio == NULL)
+        f->fim = NULL;
+
+    return temp;
+}
+
+int main() {
+    Fila fila;
+    inicializar(&fila);
+
+    int n, i, id, tempo;
+    int tempoEspera = 0;
+
+    printf("Quantidade de clientes: ");
+    scanf("%d", &n);
+
+    for (i = 0; i < n; i++) {
+        printf("\nCliente %d\n", i + 1);
+        printf("ID: ");
+        scanf("%d", &id);
+        printf("Tempo de atendimento: ");
+        scanf("%d", &tempo);
+
+        enqueue(&fila, id, tempo);
+    }
+
+    printf("\n--- Atendimento ---\n");
+
+    Cliente *c;
+    while ((c = dequeue(&fila)) != NULL) {
+        printf("Cliente %d | Tempo de espera: %d minutos\n", c->id, tempoEspera);
+        tempoEspera += c->tempoAtendimento;
+        free(c);
+    }
+
+    return 0;
+}
