@@ -2,14 +2,14 @@
 ---
 ## Segundo Bimestre
 
-##Exercício 1 — Fibonacci Recursivo (Sem Memoização)
-##Descrição
+## Exercício 1 — Fibonacci Recursivo (Sem Memoização)
+## Descrição
 
 O programa calcula um termo da sequência de Fibonacci utilizando recursão simples, sem otimizações.
 
 Além do resultado, o programa exibe a quantidade total de chamadas recursivas realizadas para demonstrar a ineficiência da abordagem ingênua.
 
-##Funcionamento
+## Funcionamento
 
 A sequência de Fibonacci é definida por:
 
@@ -42,9 +42,9 @@ Redução do Problema
 return fibonacci(n - 1, chamadas) +
        fibonacci(n - 2, chamadas);
        ---
-##Exercício 2 — Fibonacci com Memoização
+## Exercício 2 — Fibonacci com Memoização
 
-##Descrição
+## Descrição
 
 O programa resolve o mesmo problema do exercício anterior, porém utilizando memoização com alocação dinâmica.
 
@@ -56,7 +56,7 @@ O que é Memoização
 
 Memoização é uma técnica de otimização onde resultados já calculados são armazenados para reutilização futura.
 
-##Funcionamento
+## Funcionamento
 
 Um vetor alocado dinamicamente é utilizado como cache:
 
@@ -86,8 +86,8 @@ cache[n] =
     fibonacciMemo(n - 1, cache, chamadas) +
     fibonacciMemo(n - 2, cache, chamadas);
     ---
-##Exercício 3 — Torres de Hanoi
-##Descrição
+## Exercício 3 — Torres de Hanoi
+## Descrição
 
 O programa resolve o problema das Torres de Hanoi utilizando recursão.
 
@@ -148,12 +148,12 @@ Conclusão
 Os exercícios demonstram o funcionamento da recursão e mostram a diferença entre uma solução recursiva ingênua e uma solução otimizada com memoização.
 
 Também foi possível observar como a recursão divide problemas grandes em subproblemas menores até atingir o caso base.
+---
+---
 ##  Descrição
 
 Este repositório contém a resolução de 10 exercícios em linguagem C, abordando conceitos fundamentais como vetores, matrizes, ponteiros, structs e alocação dinâmica de memória.
 
----
----
 ## Primeiro Bimestre
 ##  Explicação das Soluções
 
