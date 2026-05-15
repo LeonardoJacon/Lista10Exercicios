@@ -1,11 +1,160 @@
 # Lista de Exercícios - Estrutura de Dados em C
+---
+## Segundo Bimestre
 
+##Exercício 1 — Fibonacci Recursivo (Sem Memoização)
+##Descrição
+
+O programa calcula um termo da sequência de Fibonacci utilizando recursão simples, sem otimizações.
+
+Além do resultado, o programa exibe a quantidade total de chamadas recursivas realizadas para demonstrar a ineficiência da abordagem ingênua.
+
+##Funcionamento
+
+A sequência de Fibonacci é definida por:
+
+F(n)=F(n−1)+F(n−2)
+
+Com os casos base:
+
+F(0)=0
+
+F(1)=1
+
+##Lógica da Solução
+
+A função recursiva divide o problema em dois subproblemas menores:
+
+fib(n-1)
+fib(n-2)
+
+A recursão continua até atingir os casos base.
+
+A solução recalcula vários valores repetidamente, aumentando muito a quantidade de chamadas recursivas.
+
+Caso Base
+if (n == 0)
+    return 0;
+
+if (n == 1)
+    return 1;
+Redução do Problema
+return fibonacci(n - 1, chamadas) +
+       fibonacci(n - 2, chamadas);
+       ---
+##Exercício 2 — Fibonacci com Memoização
+
+##Descrição
+
+O programa resolve o mesmo problema do exercício anterior, porém utilizando memoização com alocação dinâmica.
+
+Os resultados já calculados são armazenados em memória para evitar recálculos desnecessários.
+
+O programa também compara a quantidade de chamadas da versão ingênua e da versão otimizada.
+
+O que é Memoização
+
+Memoização é uma técnica de otimização onde resultados já calculados são armazenados para reutilização futura.
+
+##Funcionamento
+
+Um vetor alocado dinamicamente é utilizado como cache:
+
+long long *cache = malloc((n + 1) * sizeof(long long));
+
+Os valores inicialmente recebem -1, indicando que ainda não foram calculados.
+
+Antes de calcular um valor, o programa verifica:
+
+if (cache[n] != -1)
+    return cache[n];
+
+Se o valor já existir no cache, ele é retornado imediatamente.
+
+Vantagens da Memoização
+Evita cálculos repetidos
+Reduz drasticamente as chamadas recursivas
+Melhora significativamente o desempenho
+Caso Base
+if (n == 0)
+    return 0;
+
+if (n == 1)
+    return 1;
+Redução do Problema
+cache[n] =
+    fibonacciMemo(n - 1, cache, chamadas) +
+    fibonacciMemo(n - 2, cache, chamadas);
+    ---
+##Exercício 3 — Torres de Hanoi
+##Descrição
+
+O programa resolve o problema das Torres de Hanoi utilizando recursão.
+
+O usuário informa a quantidade de discos, e o programa exibe todos os movimentos necessários para mover os discos da torre de origem até a torre de destino.
+
+Regras do Problema
+Apenas um disco pode ser movido por vez
+Um disco maior nunca pode ficar sobre um disco menor
+Funcionamento
+
+A solução recursiva segue três passos:
+
+Mover n-1 discos para a torre auxiliar
+Mover o maior disco para a torre destino
+Mover novamente n-1 discos para a torre destino
+Caso Base
+
+Quando existe apenas um disco:
+
+if (n == 1)
+
+O disco é movido diretamente.
+
+Redução do Problema
+hanoi(n - 1, origem, auxiliar,
+      destino, movimentos);
+
+e depois:
+
+hanoi(n - 1, auxiliar, destino,
+      origem, movimentos);
+Quantidade de Movimentos
+
+A quantidade mínima de movimentos é dada por:
+
+M(n)=2
+n
+−1
+
+Tecnologias Utilizadas
+Linguagem C
+Recursão
+Memoização
+Alocação dinâmica de memória
+Restrições Atendidas
+Uso obrigatório de recursão
+Sem variáveis globais
+Memoização com memória dinâmica
+Caso base explícito
+Sem bibliotecas prontas para resolver os exercícios
+Compilação e Execução
+Compilar
+gcc arquivo.c -o programa
+Executar
+./programa
+Conclusão
+
+Os exercícios demonstram o funcionamento da recursão e mostram a diferença entre uma solução recursiva ingênua e uma solução otimizada com memoização.
+
+Também foi possível observar como a recursão divide problemas grandes em subproblemas menores até atingir o caso base.
 ##  Descrição
 
 Este repositório contém a resolução de 10 exercícios em linguagem C, abordando conceitos fundamentais como vetores, matrizes, ponteiros, structs e alocação dinâmica de memória.
 
 ---
-
+---
+## Primeiro Bimestre
 ##  Explicação das Soluções
 
 ### 1. Inversão de palavras
