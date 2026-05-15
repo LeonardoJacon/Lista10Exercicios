@@ -1,0 +1,55 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+long long fibonacciMemo(int n, long long *cache, long long *chamadas) {
+    (*chamadas)++;
+
+    if (cache[n] != -1)
+        return cache[n];
+
+    if (n == 0)
+        return 0;
+
+    if (n == 1)
+        return 1;
+
+    cache[n] = fibonacciMemo(n - 1, cache, chamadas) +
+               fibonacciMemo(n - 2, cache, chamadas);
+
+    return cache[n];
+}
+
+int main() {
+    int n;
+
+    printf("Digite um valor para n: ");
+    scanf("%d", &n);
+
+    long long chamadasIngenua = 0;
+    long long chamadasMemo = 0;
+
+    long long *cache = malloc((n + 1) * sizeof(long long));
+
+    if (cache == NULL) {
+        printf("Erro de alocacao de memoria.\n");
+        return 1;
+    }
+
+    for (int i = 0; i <= n; i++) {
+        cache[i] = -1;
+    }
+
+    long long resultadoMemo =
+        fibonacciMemo(n, cache, &chamadasMemo);
+
+
+    printf("\nFibonacci memoizado(%d) = %lld\n",
+           n, resultadoMemo);
+
+    printf("Chamadas recursivas (memoização): %lld\n",
+           chamadasMemo);
+
+    free(cache);
+
+    return 0;
+}

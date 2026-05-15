@@ -1,0 +1,28 @@
+#include <stdio.h>
+
+long long fibonacci(int n, long long *chamadas) {
+    (*chamadas)++;
+
+    if (n == 0)
+        return 0;
+
+    if (n == 1)
+        return 1;
+
+    return fibonacci(n - 1, chamadas) +fibonacci(n - 2, chamadas);
+}
+
+int main() {
+    int n;
+    long long chamadas = 0;
+
+    printf("Digite um valor para n: ");
+    scanf("%d", &n);
+
+    long long resultado = fibonacci(n, &chamadas);
+
+    printf("Fibonacci(%d) = %lld\n", n, resultado);
+    printf("Total de chamadas recursivas: %lld\n", chamadas);
+
+    return 0;
+}
